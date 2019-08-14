@@ -18,7 +18,6 @@ public:
         for(int i=0; i<words.size(); ++i){
             string word;
             for (int j=0; j<words[i].size(); ++j){
-                // cout << j <<endl;
                     size_t index= alphabet.find(words[i][j]) ;
                     if (index!=string::npos){
                         word+=morse[index];
@@ -33,7 +32,6 @@ public:
 
 int main(){
     Solution sol;
-
     vector<string> words={"gin", "zen", "gig", "msg"};
     int res = sol.uniqueMorseRepresentations(words);
     cout << res << endl;
