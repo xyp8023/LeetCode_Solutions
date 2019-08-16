@@ -14,34 +14,25 @@ using namespace std;
 class Solution {
 public:
     TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2) {
-        TreeNode* rTree;
-        rTree = BST(t1, t2);
-        return rTree;
-    }
-    TreeNode* BST(TreeNode* t1, TreeNode* t2){
-        TreeNode* rTree  = new TreeNode(NULL);
-        // TreeNode* rTree;
-
-        if (t1 || t2){
-            // cout << t1->val << endl;
-            // cout << t2->val << endl;
-            if (t1) rTree->val = t1->val;
-            else if (t2) rTree->val = t2->val;
-            else rTree->val = t1->val + t2->val;
-            // TreeNode* rTree = new TreeNode(t1->val + t2->val);
-            // cout << rTree->val << endl;
-            // cout << (*rTree).val << endl;
-            // if ((t1->val) && (!t2->val))  rTree->val = t1->val;
-            // else rTree->val = 0;
-            // else if ((t2->val) && (!t1->val)) rTree->val = t2->val;
-            // else rTree->val = t1->val + t2->val;
-            // BST(t1->left, t2->left);
-            // BST(t1->right, t2->right);
-
+        if (!t1){
+            return t2;
         }
-        return rTree;
+        if (!t2){
+            return t1;
+        }
+        t1->val += t2->val;
+        t1->left = mergeTrees(t1->left, t2->left);
+        t1->right = mergeTrees(t1->right, t2->right);
+        return t1;
     }
 
+    void preOrder(TreeNode* tree){
+        if (tree){
+            cout << tree->val;
+            preOrder(tree->left);
+            preOrder(tree->right);
+        }
+    }
 };
 
 int main(){
@@ -57,7 +48,9 @@ int main(){
     t2->right->right = new TreeNode(7);
 
     Solution sol;
-    auto rTree = sol.mergeTrees(t1, t2);
-    cout << rTree->val << endl;
+    TreeNode* rTree;
+    rTree = sol.mergeTrees(t1, t2);
+    sol.preOrder(rTree);
+    // cout << rTree->val << endl;
     cin.get();
 }
