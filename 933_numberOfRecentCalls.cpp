@@ -6,13 +6,16 @@ using namespace std;
 class RecentCounter {
 public:
     RecentCounter() {
-        deque<int> pings;
-    }
-    
-    int ping(int t) {
-        RecentCounter::RecentCounter();
         
     }
+    deque<int> pings;
+    int ping(int t) {
+        this->pings.push_back(t);
+        while ((t-3000)>  this->pings.at(0)){
+            this->pings.pop_front();
+        }
+        return this->pings.size();
+    }       
 };
 
 /**
@@ -23,5 +26,6 @@ public:
 
 int main(){
     RecentCounter* obj = new RecentCounter();
+    int t = 1;
     int param_1 = obj->ping(t);
 }
